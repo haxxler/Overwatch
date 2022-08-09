@@ -1,0 +1,64 @@
+$url: "https://raw.githubusercontent.com/ParkYoungWoong/overwatch-hero-selector-vanilla/master/images";
+
+body {
+  height: 100vh;
+  /* vh는 뷰포트 높이, 100분율이라 화면 전체에 해당된다. */
+  background-image: url("#{$url}/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.container {
+  padding: 50px 0;
+  .heroes {
+  	display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 40px 20px;
+		.hero {
+			width: 80px;
+			height: 84px;
+			margin: 4px;
+			border: 3px solid #ffffff;
+			background-color: #555; 
+			overflow: hidden;
+			border-radius: 10px;
+			box-sizing: border-box;
+			transform: skewX(-14deg);
+			transition: 
+					transform .2s,
+					background-color .6s;
+	 /* 원래 transition: all 이 앞에 숨어있는데, 전환을 특정한 속성에 적용하려면 all을 바꿔서 */
+			&:hover {
+				background-color: #ff9c00;
+				transform: skewX(-14deg) scale(1.3) ;
+				/* 쌓인 순서값을 높여서 커서 올라간 캐릭터 사진이 제일 위에 오도록 */
+				z-index: 1;
+			}
+			.image {
+				width: 140%;
+				height: 100%;
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size:90px;
+				transform: skewX(14deg) translate(-16px);
+			}	
+			// .hero
+			@for $i from 1 through 32 {
+				&:nth-child(#{$i}) .image { background-image: url("#{$url}/hero#{$i}.png") ;}		
+			}
+		}		
+  }
+	.logo {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 0 20px;	
+		img {
+			width: 100%;
+		}
+	}
+}
+
